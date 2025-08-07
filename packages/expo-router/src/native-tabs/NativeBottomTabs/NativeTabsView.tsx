@@ -150,6 +150,8 @@ export interface NativeTabsViewProps {
   >;
 }
 
+export const NativeTabsContext = React.createContext<boolean>(false);
+
 // TODO: Add support for dynamic params inside a route
 export function NativeTabsView(props: NativeTabsViewProps) {
   const { builder, style, minimizeBehavior, disableIndicator } = props;
@@ -179,9 +181,6 @@ export function NativeTabsView(props: NativeTabsViewProps) {
       const descriptor = descriptors[route.key];
       const isFocused = state.index === index;
       const title = descriptor.options.title ?? route.name;
-
-      console.log('icon', convertOptionsIconToPropsIcon(descriptor.options.icon));
-      console.log('selectedIcon', convertOptionsIconToPropsIcon(descriptor.options.selectedIcon));
 
       return (
         <BottomTabsScreen
@@ -229,7 +228,7 @@ export function NativeTabsView(props: NativeTabsViewProps) {
           },
         });
       }}>
-      {children}
+      <NativeTabsContext value>{children}</NativeTabsContext>
     </BottomTabs>
   );
 }
