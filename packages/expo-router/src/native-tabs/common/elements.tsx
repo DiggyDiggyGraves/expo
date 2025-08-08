@@ -6,6 +6,12 @@ interface LabelProps {
    * The text to display as the label for the tab.
    */
   children?: string;
+
+  /**
+   * If true, the label will be hidden.
+   * @default false
+   */
+  hidden?: boolean;
 }
 
 export function Label(props: LabelProps) {
